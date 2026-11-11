@@ -16,8 +16,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "ShopHub — E-commerce Manager",
-  description: "Multi-shop e-commerce management with a shared product catalog.",
+  title: "ShopHub by CSN Bangladesh Ltd. — E-commerce Manager",
+  description: "Multi-shop e-commerce management with a shared product catalog. ShopHub by CSN Bangladesh Ltd.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

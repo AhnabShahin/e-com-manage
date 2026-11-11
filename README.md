@@ -1,4 +1,4 @@
-# ShopHub — Multi-Shop E-commerce Manager
+# ShopHub by CSN Bangladesh Ltd. — Multi-Shop E-commerce Manager
 
 A small e-commerce management system built around a **shared product catalog**. Admins
 manage shops, products, and shop-owner accounts; shop owners list catalog products in
@@ -13,7 +13,7 @@ Monorepo:
 
 | Folder  | Stack                         | Runs at                 |
 | ------- | ------------------------------ | ----------------------- |
-| `api/`  | Laravel 13 (PHP) + Sanctum REST| http://localhost:8001   |
+| `api/`  | Laravel 13 (PHP) + Sanctum REST| http://localhost:8000   |
 | `web/`  | Next.js 16 (React + TypeScript)| http://localhost:3000   |
 | DB      | MySQL                          | `ecom_manage`            |
 
@@ -149,10 +149,10 @@ php artisan storage:link
 Start the API:
 
 ```bash
-php artisan serve --port=8001
+php artisan serve --port=8000
 ```
 
-The API is now running at **http://localhost:8001**. Leave this terminal open.
+The API is now running at **http://localhost:8000**. Leave this terminal open.
 
 ---
 
@@ -229,7 +229,7 @@ New customers and shop owners can also self-register at `/register`.
 | Browser shows a CORS error / "Failed to fetch" when logging in | The web app's port isn't in `FRONTEND_URL` in `api/.env`. Add it (comma-separated) and restart `php artisan serve`. |
 | `SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost'` | Your MySQL root password isn't empty. Set `DB_PASSWORD` in `api/.env` to match, or reset it via phpMyAdmin → User accounts. |
 | `php artisan key:generate` errors or app shows "No application encryption key" | Make sure `api/.env` exists (copied from `.env.example`) before running the command. |
-| Port 8001 or 3000 already in use | Pass a different port, e.g. `php artisan serve --port=8002`, and update `NEXT_PUBLIC_API_URL` in `web/.env.local` to match; or stop whatever is already using that port. |
+| Port 8000 or 3000 already in use | Pass a different port, e.g. `php artisan serve --port=8002`, and update `NEXT_PUBLIC_API_URL` in `web/.env.local` to match; or stop whatever is already using that port. |
 
 ---
 

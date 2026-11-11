@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001/api";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api";
 const TOKEN_KEY = "ecom_token";
 
 export class ApiError extends Error {

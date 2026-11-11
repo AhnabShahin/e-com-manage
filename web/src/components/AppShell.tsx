@@ -24,9 +24,10 @@ export function AppShell({ title, nav, children }: { title: string; nav: NavItem
     <div className="flex min-h-screen">
       <aside className="hidden w-60 flex-col border-r border-line bg-white sm:flex">
         <div className="border-b border-line px-5 py-5">
-          <Link href="/" className="font-serif text-xl font-bold tracking-[0.15em] text-brand-red">
+          <Link href="/" className="block font-serif text-xl font-bold tracking-[0.15em] text-brand-red">
             SHOPHUB
           </Link>
+          <p className="text-[9px] font-semibold uppercase tracking-wide text-muted">by CSN Bangladesh Ltd.</p>
           <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-muted">{title}</p>
         </div>
         <nav className="flex-1 space-y-1 p-3">

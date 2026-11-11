@@ -26,7 +26,10 @@ export default function Home() {
       </div>
 
       <header className="flex items-center justify-between border-b border-line px-6 py-4">
-        <span className="font-serif text-2xl font-bold tracking-[0.2em] text-brand-red">SHOPHUB</span>
+        <span>
+          <span className="block font-serif text-2xl font-bold tracking-[0.2em] text-brand-red">SHOPHUB</span>
+          <span className="block text-[9px] font-semibold uppercase tracking-wide text-muted">by CSN Bangladesh Ltd.</span>
+        </span>
         <div className="flex gap-3 text-[13px] font-semibold uppercase tracking-wide">
           <Link href="/shops" className="px-4 py-2 text-ink hover:text-brand-red">
             Browse Shops

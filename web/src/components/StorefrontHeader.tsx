@@ -36,8 +36,9 @@ export function StorefrontHeader() {
 
       <div className="border-b border-line">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/shops" className="font-serif text-2xl font-bold tracking-[0.2em] text-brand-red">
-            SHOPHUB
+          <Link href="/shops">
+            <span className="block font-serif text-2xl font-bold tracking-[0.2em] text-brand-red">SHOPHUB</span>
+            <span className="block text-[9px] font-semibold uppercase tracking-wide text-muted">by CSN Bangladesh Ltd.</span>
           </Link>
           <nav className="flex items-center gap-5 text-[13px] font-semibold uppercase tracking-wide">
             <Link href="/shops" className="text-nav hover:text-brand-red">

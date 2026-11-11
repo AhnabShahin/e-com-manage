@@ -43,8 +43,9 @@ export default function RegisterPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <Link href="/" className="mb-6 block text-center font-serif text-3xl font-bold tracking-[0.2em] text-brand-red">
-          SHOPHUB
+        <Link href="/" className="mb-6 block text-center">
+          <span className="block font-serif text-3xl font-bold tracking-[0.2em] text-brand-red">SHOPHUB</span>
+          <span className="mt-1 block text-[10px] font-semibold uppercase tracking-wide text-muted">by CSN Bangladesh Ltd.</span>
         </Link>
         <div className="border border-line bg-white p-6 shadow-sm">
           <h1 className="text-lg font-semibold text-ink">Create account</h1>
