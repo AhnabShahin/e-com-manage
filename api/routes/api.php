@@ -49,18 +49,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Shared catalog + categories (admins and shop owners)
+    | Shop owner: shared catalog, own shops, and their product listings
     |----------------------------------------------------------------------
-    */
-    Route::get('categories', [CategoryController::class, 'index']);
-    Route::apiResource('products', ProductController::class);
-
-    /*
-    |----------------------------------------------------------------------
-    | Shop owner: own shops and their product listings
-    |----------------------------------------------------------------------
+    | Customers must never reach the raw catalog directly — they only ever
+    | see products through /storefront/... (shop listings), so this whole
+    | group is admin/shop-owner only.
     */
     Route::middleware('role:admin,shop_owner')->group(function () {
+        Route::get('categories', [CategoryController::class, 'index']);
+        Route::apiResource('products', ProductController::class);
+
         Route::get('my/shops', [MyShopController::class, 'index']);
         Route::get('my/shops/{shop}', [MyShopController::class, 'show']);
 

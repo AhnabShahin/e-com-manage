@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Validation\ValidationException;
 
 /**
  * The shared product catalog. Both admins and shop owners use these endpoints:
@@ -74,9 +75,18 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function destroy(Product $product): \Illuminate\Http\JsonResponse
+    public function destroy(Request $request, Product $product): \Illuminate\Http\JsonResponse
     {
         $this->authorize('delete', $product);
+
+        // Deleting a shared-catalog product cascades to every shop's listing of
+        // it (and their variation rows). Only an admin may force that; a shop
+        // owner must first get every shop to remove the listing.
+        if (! $request->user()->isAdmin() && $product->shopProducts()->exists()) {
+            throw ValidationException::withMessages([
+                'product' => 'This product is listed in one or more shops. Ask those shops to remove the listing before deleting it from the catalog.',
+            ]);
+        }
 
         $product->delete();
 

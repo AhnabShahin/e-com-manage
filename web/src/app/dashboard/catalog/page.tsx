@@ -58,14 +58,23 @@ export default function CatalogBrowse() {
         <Button onClick={() => setCreateOpen(true)}>+ Create product</Button>
       </div>
 
-      <div className="mb-4 flex flex-wrap gap-3">
-        <Input placeholder="Search catalog…" value={search} onChange={(e) => setSearch(e.target.value)} className="max-w-xs" />
-        <Select value={selectedShop} onChange={(e) => setSelectedShop(e.target.value)} className="max-w-xs">
-          <option value="">Select a shop to add to…</option>
-          {shops.map((s) => (
-            <option key={s.id} value={s.id}>{s.name}</option>
-          ))}
-        </Select>
+      <div className="mb-6 flex flex-wrap items-center gap-3 border border-line bg-cream/50 p-3">
+        <Input
+          placeholder="Search catalog…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="max-w-xs border-line bg-white"
+        />
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wide text-muted">Adding to</span>
+          <Select value={selectedShop} onChange={(e) => setSelectedShop(e.target.value)} className="w-48 border-line bg-white">
+            <option value="">Select a shop…</option>
+            {shops.map((s) => (
+              <option key={s.id} value={s.id}>{s.name}</option>
+            ))}
+          </Select>
+        </div>
+        <span className="ml-auto text-xs text-muted">{products.length} product{products.length === 1 ? "" : "s"}</span>
       </div>
 
       {loading ? (
@@ -73,25 +82,45 @@ export default function CatalogBrowse() {
       ) : products.length === 0 ? (
         <EmptyState title="No products in catalog" hint="Create the first product." />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {products.map((p) => (
-            <div key={p.id} className="flex flex-col border border-line bg-white p-4">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="font-medium text-ink">{p.name}</h3>
-                  <p className="text-xs text-muted">{p.category?.name ?? "Uncategorized"} · by {p.creator?.name ?? "—"}</p>
-                </div>
-                {p.type === "variable" ? <Badge color="indigo">Variable</Badge> : <Badge>Simple</Badge>}
+            <div key={p.id} className="group flex flex-col border border-line bg-white transition hover:border-brand-red/30">
+              <div className="aspect-square overflow-hidden bg-cream">
+                {p.primary_image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.primary_image}
+                    alt={p.name}
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-xs uppercase tracking-wide text-line">No image</div>
+                )}
               </div>
-              {p.description && <p className="mt-2 line-clamp-2 text-sm text-muted">{p.description}</p>}
-              <div className="mt-4 flex-1" />
-              {p.listed_in_shop ? (
-                <Badge color="green">Already in this shop</Badge>
-              ) : (
-                <Button size="sm" variant="secondary" disabled={!selectedShop} onClick={() => openListing(p)}>
-                  {selectedShop ? `Add to ${shop?.name}` : "Pick a shop first"}
-                </Button>
-              )}
+
+              <div className="flex flex-1 flex-col p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-red">
+                    {p.category?.name ?? "Uncategorized"}
+                  </p>
+                  {p.type === "variable" && <Badge color="indigo">Variable</Badge>}
+                </div>
+                <h3 className="mt-1 text-sm font-semibold text-ink">{p.name}</h3>
+                <p className="mt-0.5 text-[11px] text-muted">by {p.creator?.name ?? "—"}</p>
+                {p.description && <p className="mt-1.5 line-clamp-2 text-xs text-muted">{p.description}</p>}
+
+                <div className="mt-3 flex-1" />
+
+                {p.listed_in_shop ? (
+                  <div className="flex items-center justify-center border border-line bg-cream/60 py-2">
+                    <Badge color="green">Already in this shop</Badge>
+                  </div>
+                ) : (
+                  <Button size="sm" variant="secondary" disabled={!selectedShop} onClick={() => openListing(p)} className="w-full">
+                    {selectedShop ? `Add to ${shop?.name}` : "Pick a shop first"}
+                  </Button>
+                )}
+              </div>
             </div>
           ))}
         </div>

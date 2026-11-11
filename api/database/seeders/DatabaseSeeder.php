@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
+use App\Services\OrderService;
 use App\Services\ShopProductService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $service = app(ShopProductService::class);
+        $orders = app(OrderService::class);
 
         // --- Users -----------------------------------------------------------
         $admin = User::create([
@@ -40,9 +42,44 @@ class DatabaseSeeder extends Seeder
             'role' => UserRole::ShopOwner,
         ]);
 
+        $grace = User::create([
+            'name' => 'Grace (Owner)',
+            'email' => 'grace@example.com',
+            'password' => 'password',
+            'role' => UserRole::ShopOwner,
+        ]);
+
+        $henry = User::create([
+            'name' => 'Henry (Owner)',
+            'email' => 'henry@example.com',
+            'password' => 'password',
+            'role' => UserRole::ShopOwner,
+        ]);
+
         $carol = User::create([
             'name' => 'Carol (Customer)',
             'email' => 'carol@example.com',
+            'password' => 'password',
+            'role' => UserRole::Customer,
+        ]);
+
+        $dave = User::create([
+            'name' => 'Dave (Customer)',
+            'email' => 'dave@example.com',
+            'password' => 'password',
+            'role' => UserRole::Customer,
+        ]);
+
+        $emma = User::create([
+            'name' => 'Emma (Customer)',
+            'email' => 'emma@example.com',
+            'password' => 'password',
+            'role' => UserRole::Customer,
+        ]);
+
+        $farhan = User::create([
+            'name' => 'Farhan (Customer)',
+            'email' => 'farhan@example.com',
             'password' => 'password',
             'role' => UserRole::Customer,
         ]);
@@ -189,6 +226,20 @@ class DatabaseSeeder extends Seeder
             'description' => 'Furniture and home essentials.',
         ]);
 
+        $graceShop = Shop::create([
+            'owner_id' => $grace->id,
+            'name' => "Grace's Home Store",
+            'slug' => 'graces-home-store',
+            'description' => 'Furniture and home decor for every room.',
+        ]);
+
+        $henryShop = Shop::create([
+            'owner_id' => $henry->id,
+            'name' => "Henry's Electronics",
+            'slug' => 'henrys-electronics',
+            'description' => 'Budget-friendly electronics and gadgets.',
+        ]);
+
         // A shop with no listings — must stay invisible-of-products to customers.
         Shop::create([
             'owner_id' => null,
@@ -197,12 +248,12 @@ class DatabaseSeeder extends Seeder
             'description' => 'Newly created, no products yet.',
         ]);
 
-        // --- Listings: the same catalog product listed by different shops ----
+        // --- Listings: the same catalog product listed by several shops ------
         // at different prices, proving the shared-catalog model.
-        $service->attach($aliceShop, $cable, ['price' => 9.99]);
+        $aliceCable = $service->attach($aliceShop, $cable, ['price' => 9.99]);
         $service->attach($aliceShop, $headphones, ['price' => 49.99]);
         $service->attach($aliceShop, $mug, ['price' => 12.50]);
-        $service->attach($aliceShop, $tv, [
+        $aliceTv = $service->attach($aliceShop, $tv, [
             'variations' => $tv->variations->map(fn ($v) => [
                 'product_variation_id' => $v->id,
                 'price' => match ($v->name) {
@@ -221,12 +272,11 @@ class DatabaseSeeder extends Seeder
             ])->all(),
         ]);
 
-        // Bob lists the SAME cable at a different price + his own catalog.
-        $bobCable = $service->attach($bobShop, $cable, ['price' => 8.49]);
+        $service->attach($bobShop, $cable, ['price' => 8.49]);
         $service->attach($bobShop, $lamp, ['price' => 24.99]);
-        $service->attach($bobShop, $desk, ['price' => 159.00]);
+        $bobDesk = $service->attach($bobShop, $desk, ['price' => 159.00]);
         $service->attach($bobShop, $bookshelf, ['price' => 189.00]);
-        $service->attach($bobShop, $sofa, [
+        $bobSofa = $service->attach($bobShop, $sofa, [
             'variations' => $sofa->variations->map(fn ($v) => [
                 'product_variation_id' => $v->id,
                 'price' => str_contains($v->name, '3-Seater') ? 899.00 : 699.00,
@@ -234,11 +284,93 @@ class DatabaseSeeder extends Seeder
             ])->all(),
         ]);
 
-        // --- A sample customer order -----------------------------------------
-        $aliceCable = $aliceShop->shopProducts()->where('product_id', $cable->id)->first();
-        app(\App\Services\OrderService::class)->checkout($carol, [
-            ['shop_product_id' => $aliceCable->id, 'quantity' => 2],
+        $graceDesk = $service->attach($graceShop, $desk, ['price' => 179.00]);
+        $graceSofa = $service->attach($graceShop, $sofa, [
+            'variations' => $sofa->variations->map(fn ($v) => [
+                'product_variation_id' => $v->id,
+                'price' => str_contains($v->name, '3-Seater') ? 949.00 : 749.00,
+                'stock' => 6,
+            ])->all(),
         ]);
+        $service->attach($graceShop, $bookshelf, ['price' => 209.00]);
+        $graceChair = $service->attach($graceShop, $chair, [
+            'variations' => $chair->variations->map(fn ($v) => [
+                'product_variation_id' => $v->id,
+                'price' => 149.00,
+                'stock' => 15,
+            ])->all(),
+        ]);
+        $service->attach($graceShop, $mug, ['price' => 14.00]);
+
+        $henryCable = $service->attach($henryShop, $cable, ['price' => 7.99]);
+        $service->attach($henryShop, $headphones, ['price' => 44.99]);
+        $henryTv = $service->attach($henryShop, $tv, [
+            'variations' => $tv->variations->map(fn ($v) => [
+                'product_variation_id' => $v->id,
+                'price' => match ($v->name) {
+                    '43-inch' => 299.00,
+                    '55-inch' => 459.00,
+                    default => 599.00,
+                },
+                'stock' => 7,
+            ])->all(),
+        ]);
+        $service->attach($henryShop, $lamp, ['price' => 21.99]);
+
+        // --- Sample customer orders, spread across shops with mixed statuses -
+        $findVariation = fn ($shopProduct, string $name) => $shopProduct->variations
+            ->first(fn ($v) => $v->productVariation->name === $name);
+
+        $order1 = $orders->checkout($carol, [
+            ['shop_product_id' => $aliceCable->id, 'quantity' => 2],
+        ])[0];
+
+        $order2 = $orders->checkout($carol, [
+            [
+                'shop_product_id' => $bobSofa->id,
+                'shop_product_variation_id' => $findVariation($bobSofa, 'Charcoal / 2-Seater')->id,
+                'quantity' => 1,
+            ],
+        ])[0];
+
+        $order3 = $orders->checkout($dave, [
+            [
+                'shop_product_id' => $henryTv->id,
+                'shop_product_variation_id' => $findVariation($henryTv, '55-inch')->id,
+                'quantity' => 1,
+            ],
+        ])[0];
+
+        $order4 = $orders->checkout($dave, [
+            ['shop_product_id' => $graceDesk->id, 'quantity' => 1],
+        ])[0];
+
+        $order5 = $orders->checkout($emma, [
+            ['shop_product_id' => $aliceShop->shopProducts()->where('product_id', $headphones->id)->first()->id, 'quantity' => 2],
+        ])[0];
+
+        $order6 = $orders->checkout($emma, [
+            [
+                'shop_product_id' => $graceChair->id,
+                'shop_product_variation_id' => $findVariation($graceChair, 'Black')->id,
+                'quantity' => 1,
+            ],
+        ])[0];
+
+        $order7 = $orders->checkout($farhan, [
+            ['shop_product_id' => $bobShop->shopProducts()->where('product_id', $lamp->id)->first()->id, 'quantity' => 3],
+        ])[0];
+
+        $order8 = $orders->checkout($farhan, [
+            ['shop_product_id' => $henryCable->id, 'quantity' => 1],
+        ])[0];
+
+        // Mix order statuses so admin/shop dashboards have something to show.
+        foreach ([$order1, $order3, $order6, $order8] as $order) {
+            $order->update(['status' => 'completed']);
+        }
+        $order5->update(['status' => 'cancelled']);
+        // $order2, $order4, $order7 stay 'pending'.
     }
 
     private function category(string $name): Category
