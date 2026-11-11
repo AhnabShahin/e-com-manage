@@ -1,0 +1,6 @@
+# Local AI coding assistant configs/docs — never part of the project history.
+.claude/
+.cursor/
+.codex/
+AGENTS.md
+CLAUDE.md
