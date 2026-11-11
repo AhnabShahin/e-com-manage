@@ -92,8 +92,8 @@ export default function AdminUsers() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Staff accounts</h1>
-          <p className="text-sm text-gray-500">Administrators and shop owners. Customers self-register.</p>
+          <h1 className="text-2xl font-bold text-ink">Staff accounts</h1>
+          <p className="text-sm text-muted">Administrators and shop owners. Customers self-register.</p>
         </div>
         <Button onClick={openCreate}>+ New account</Button>
       </div>
@@ -103,9 +103,9 @@ export default function AdminUsers() {
       ) : users.length === 0 ? (
         <EmptyState title="No accounts yet" hint="Create an administrator or shop-owner account." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="overflow-hidden border border-line bg-white">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+            <thead className="bg-cream text-left text-xs uppercase text-muted">
               <tr>
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Email</th>
@@ -115,15 +115,15 @@ export default function AdminUsers() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-cream">
               {users.map((u) => (
                 <tr key={u.id}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{u.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{u.email}</td>
+                  <td className="px-4 py-3 font-medium text-ink">{u.name}</td>
+                  <td className="px-4 py-3 text-muted">{u.email}</td>
                   <td className="px-4 py-3">
                     <Badge color={u.role === "admin" ? "indigo" : "gray"}>{u.role_label}</Badge>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{u.shops_count ?? 0}</td>
+                  <td className="px-4 py-3 text-muted">{u.shops_count ?? 0}</td>
                   <td className="px-4 py-3">
                     {u.is_active ? <Badge color="green">Active</Badge> : <Badge color="amber">Disabled</Badge>}
                   </td>
@@ -140,7 +140,7 @@ export default function AdminUsers() {
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit account" : "New account"}>
         <form onSubmit={save} className="space-y-4">
-          {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+          {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
           {!editing && (
             <Field label="Role">
               <Select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value as StaffRole })}>
@@ -166,7 +166,7 @@ export default function AdminUsers() {
               required={!editing || form.password.length > 0}
             />
           </Field>
-          <label className="flex items-center gap-2 text-sm text-gray-700">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" checked={form.is_active} onChange={(e) => setForm({ ...form, is_active: e.target.checked })} />
             Active (can sign in)
           </label>

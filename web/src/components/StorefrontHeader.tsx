@@ -6,6 +6,12 @@ import { roleHome } from "@/lib/roles";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+const ANNOUNCEMENTS = [
+  "FREE DELIVERY ON ORDERS ABOVE TK 2,000",
+  "NEW ELECTRONICS & FURNITURE DROPS WEEKLY",
+  "MULTI-SHOP CATALOG — ONE CART, EVERY SHOP",
+];
+
 export function StorefrontHeader() {
   const { user, logout } = useAuth();
   const { count } = useCart();
@@ -17,40 +23,60 @@ export function StorefrontHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <Link href="/shops" className="text-lg font-bold text-indigo-600">ShopHub</Link>
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/shops" className="text-gray-600 hover:text-gray-900">Shops</Link>
+    <header className="sticky top-0 z-10 bg-white">
+      <div className="overflow-hidden border-b border-line bg-cream py-2">
+        <div className="flex animate-marquee whitespace-nowrap text-[11px] font-semibold uppercase tracking-wide text-maroon">
+          {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((a, i) => (
+            <span key={i} className="mx-8">
+              {a}
+            </span>
+          ))}
+        </div>
+      </div>
 
-          <Link href="/cart" className="relative text-gray-600 hover:text-gray-900">
-            Cart
-            {count > 0 && (
-              <span className="absolute -right-3 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-indigo-600 px-1 text-[10px] font-medium text-white">
-                {count}
-              </span>
-            )}
+      <div className="border-b border-line">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <Link href="/shops" className="font-serif text-2xl font-bold tracking-[0.2em] text-brand-red">
+            SHOPHUB
           </Link>
-
-          {user ? (
-            <div className="flex items-center gap-3">
-              {user.role === "customer" && (
-                <Link href="/account/orders" className="text-gray-600 hover:text-gray-900">My orders</Link>
-              )}
-              {user.role !== "customer" && (
-                <Link href={roleHome(user.role)} className="text-gray-600 hover:text-gray-900">Dashboard</Link>
-              )}
-              <span className="hidden text-gray-400 sm:inline">{user.name}</span>
-              <button onClick={handleLogout} className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50">
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link href="/login" className="rounded-lg bg-indigo-600 px-3 py-1.5 font-medium text-white hover:bg-indigo-500">
-              Sign in
+          <nav className="flex items-center gap-5 text-[13px] font-semibold uppercase tracking-wide">
+            <Link href="/shops" className="text-nav hover:text-brand-red">
+              Shops
             </Link>
-          )}
-        </nav>
+
+            <Link href="/cart" className="relative text-nav hover:text-brand-red">
+              Cart
+              {count > 0 && (
+                <span className="absolute -right-3 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-sale px-1 text-[10px] font-semibold text-white">
+                  {count}
+                </span>
+              )}
+            </Link>
+
+            {user ? (
+              <div className="flex items-center gap-4">
+                {user.role === "customer" && (
+                  <Link href="/account/orders" className="text-nav hover:text-brand-red">
+                    My orders
+                  </Link>
+                )}
+                {user.role !== "customer" && (
+                  <Link href={roleHome(user.role)} className="text-nav hover:text-brand-red">
+                    Dashboard
+                  </Link>
+                )}
+                <span className="hidden normal-case tracking-normal text-muted sm:inline">{user.name}</span>
+                <button onClick={handleLogout} className="border border-ink px-3 py-1.5 text-ink hover:bg-ink hover:text-white">
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link href="/login" className="bg-ink px-4 py-2 text-white hover:bg-maroon">
+                Sign in
+              </Link>
+            )}
+          </nav>
+        </div>
       </div>
     </header>
   );

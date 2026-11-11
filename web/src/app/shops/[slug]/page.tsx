@@ -34,16 +34,16 @@ export default function ShopStorefront() {
 
   return (
     <div>
-      <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/shops" className="hover:text-indigo-600">
+      <nav className="mb-4 text-sm text-muted">
+        <Link href="/shops" className="hover:text-brand-red">
           Shops
         </Link>{" "}
-        / <span className="text-gray-700">{shop.name}</span>
+        / <span className="text-ink">{shop.name}</span>
       </nav>
 
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{shop.name}</h1>
-        {shop.description && <p className="mt-1 text-gray-600">{shop.description}</p>}
+        <h1 className="text-2xl font-bold text-ink">{shop.name}</h1>
+        {shop.description && <p className="mt-1 text-muted">{shop.description}</p>}
       </div>
 
       {products.length === 0 ? (
@@ -54,23 +54,23 @@ export default function ShopStorefront() {
             <Link
               key={sp.id}
               href={`/shops/${shop.slug}/products/${sp.id}`}
-              className="group overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:border-indigo-300 hover:shadow-sm"
+              className="group overflow-hidden border border-line bg-white transition hover:border-brand-red/30 hover:shadow-sm"
             >
-              <div className="aspect-square overflow-hidden bg-gray-100">
+              <div className="aspect-square overflow-hidden bg-cream">
                 {sp.thumbnail ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={sp.thumbnail} alt={sp.product?.name} className="h-full w-full object-cover transition group-hover:scale-105" />
                 ) : (
-                  <div className="flex h-full items-center justify-center text-gray-300">No image</div>
+                  <div className="flex h-full items-center justify-center text-line">No image</div>
                 )}
               </div>
               <div className="p-4">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-medium text-gray-900 group-hover:text-indigo-600">{sp.product?.name}</h3>
+                  <h3 className="font-medium text-ink group-hover:text-brand-red">{sp.product?.name}</h3>
                   {sp.is_variable && <Badge color="indigo">Options</Badge>}
                 </div>
-                {sp.product?.category && <p className="mt-0.5 text-xs text-gray-400">{sp.product.category.name}</p>}
-                <p className="mt-2 font-semibold text-gray-900">{priceRange(sp.price_from, sp.price_to)}</p>
+                {sp.product?.category && <p className="mt-0.5 text-xs text-muted">{sp.product.category.name}</p>}
+                <p className="mt-2 font-semibold text-ink">{priceRange(sp.price_from, sp.price_to)}</p>
               </div>
             </Link>
           ))}

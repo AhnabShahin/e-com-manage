@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f5efe5"/>
+  <rect x="140" y="220" width="320" height="24" fill="#16161a"/>
+  <line x1="160" y1="244" x2="160" y2="420" stroke="#16161a" stroke-width="14" stroke-linecap="round"/>
+  <line x1="440" y1="244" x2="440" y2="420" stroke="#16161a" stroke-width="14" stroke-linecap="round"/>
+  <rect x="320" y="250" width="110" height="70" fill="none" stroke="#16161a" stroke-width="10"/>
+  <rect x="365" y="280" width="24" height="10" fill="#8a0e18"/>
+  <text x="300" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#767676">STUDY DESK</text>
+</svg>

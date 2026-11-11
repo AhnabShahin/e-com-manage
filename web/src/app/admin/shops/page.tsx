@@ -85,7 +85,7 @@ export default function AdminShops() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Shops</h1>
+        <h1 className="text-2xl font-bold text-ink">Shops</h1>
         <Button onClick={openCreate}>+ New shop</Button>
       </div>
 
@@ -94,9 +94,9 @@ export default function AdminShops() {
       ) : shops.length === 0 ? (
         <EmptyState title="No shops yet" hint="Create your first shop." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="overflow-hidden border border-line bg-white">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+            <thead className="bg-cream text-left text-xs uppercase text-muted">
               <tr>
                 <th className="px-4 py-3">Shop</th>
                 <th className="px-4 py-3">Owner</th>
@@ -105,15 +105,15 @@ export default function AdminShops() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-cream">
               {shops.map((shop) => (
                 <tr key={shop.id}>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900">{shop.name}</p>
-                    <p className="text-xs text-gray-400">/{shop.slug}</p>
+                    <p className="font-medium text-ink">{shop.name}</p>
+                    <p className="text-xs text-muted">/{shop.slug}</p>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{shop.owner?.name ?? <span className="text-gray-400">Unassigned</span>}</td>
-                  <td className="px-4 py-3 text-gray-600">{shop.products_count ?? 0}</td>
+                  <td className="px-4 py-3 text-muted">{shop.owner?.name ?? <span className="text-muted">Unassigned</span>}</td>
+                  <td className="px-4 py-3 text-muted">{shop.products_count ?? 0}</td>
                   <td className="px-4 py-3">
                     {shop.is_active ? <Badge color="green">Active</Badge> : <Badge color="amber">Inactive</Badge>}
                   </td>
@@ -130,7 +130,7 @@ export default function AdminShops() {
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit shop" : "New shop"}>
         <form onSubmit={save} className="space-y-4">
-          {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+          {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
           <Field label="Name">
             <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
           </Field>
@@ -147,7 +147,7 @@ export default function AdminShops() {
               ))}
             </Select>
           </Field>
-          <label className="flex items-center gap-2 text-sm text-gray-700">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" checked={form.is_active} onChange={(e) => setForm({ ...form, is_active: e.target.checked })} />
             Active (visible to customers)
           </label>

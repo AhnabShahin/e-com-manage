@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f5efe5"/>
+  <rect x="255" y="150" width="90" height="36" rx="8" fill="#16161a"/>
+  <rect x="270" y="186" width="60" height="20" fill="#16161a"/>
+  <rect x="225" y="206" width="150" height="260" rx="28" fill="none" stroke="#16161a" stroke-width="14"/>
+  <rect x="225" y="300" width="150" height="50" fill="#8a0e18"/>
+  <text x="300" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#767676">WATER BOTTLE</text>
+</svg>

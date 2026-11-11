@@ -52,8 +52,8 @@ export default function CatalogBrowse() {
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Shared catalog</h1>
-          <p className="text-sm text-gray-500">Add catalog products to your shop, or create your own.</p>
+          <h1 className="text-2xl font-bold text-ink">Shared catalog</h1>
+          <p className="text-sm text-muted">Add catalog products to your shop, or create your own.</p>
         </div>
         <Button onClick={() => setCreateOpen(true)}>+ Create product</Button>
       </div>
@@ -75,15 +75,15 @@ export default function CatalogBrowse() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <div key={p.id} className="flex flex-col rounded-xl border border-gray-200 bg-white p-4">
+            <div key={p.id} className="flex flex-col border border-line bg-white p-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <h3 className="font-medium text-gray-900">{p.name}</h3>
-                  <p className="text-xs text-gray-400">{p.category?.name ?? "Uncategorized"} · by {p.creator?.name ?? "—"}</p>
+                  <h3 className="font-medium text-ink">{p.name}</h3>
+                  <p className="text-xs text-muted">{p.category?.name ?? "Uncategorized"} · by {p.creator?.name ?? "—"}</p>
                 </div>
                 {p.type === "variable" ? <Badge color="indigo">Variable</Badge> : <Badge>Simple</Badge>}
               </div>
-              {p.description && <p className="mt-2 line-clamp-2 text-sm text-gray-500">{p.description}</p>}
+              {p.description && <p className="mt-2 line-clamp-2 text-sm text-muted">{p.description}</p>}
               <div className="mt-4 flex-1" />
               {p.listed_in_shop ? (
                 <Badge color="green">Already in this shop</Badge>

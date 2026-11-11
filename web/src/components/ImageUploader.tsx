@@ -69,17 +69,17 @@ export function ImageUploader({
           : null);
 
   const Tile = ({ src, featured, onFeature, onRemove }: { src: string; featured: boolean; onFeature: () => void; onRemove: () => void }) => (
-    <div className={clsx("relative overflow-hidden rounded-lg border", featured ? "border-indigo-500 ring-2 ring-indigo-200" : "border-gray-200")}>
+    <div className={clsx("relative overflow-hidden border", featured ? "border-maroon ring-2 ring-brand-red/20" : "border-line")}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt="" className="aspect-square w-full object-cover" />
       {featured && (
-        <span className="absolute left-1 top-1 rounded bg-indigo-600 px-1.5 py-0.5 text-[10px] font-medium text-white">Feature</span>
+        <span className="absolute left-1 top-1 rounded bg-brand-red px-1.5 py-0.5 text-[10px] font-medium text-white">Feature</span>
       )}
       <div className="absolute inset-x-0 bottom-0 flex justify-between gap-1 bg-black/40 p-1">
         <button type="button" onClick={onFeature} className="rounded px-1 text-[10px] text-white hover:bg-white/20">
           Set feature
         </button>
-        <button type="button" onClick={onRemove} className="rounded px-1 text-[10px] text-white hover:bg-red-500">
+        <button type="button" onClick={onRemove} className="rounded px-1 text-[10px] text-white hover:bg-sale">
           Remove
         </button>
       </div>
@@ -108,13 +108,13 @@ export function ImageUploader({
           />
         ))}
 
-        <label className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-gray-400 hover:border-indigo-400 hover:text-indigo-500">
+        <label className="flex aspect-square cursor-pointer flex-col items-center justify-center border-2 border-dashed border-line text-muted hover:border-brand-red/50 hover:text-maroon">
           <span className="text-2xl leading-none">+</span>
           <span className="mt-1 text-[10px]">Add image</span>
           <input type="file" accept="image/*" multiple className="hidden" onChange={(e) => addFiles(e.target.files)} />
         </label>
       </div>
-      <p className="mt-2 text-xs text-gray-400">
+      <p className="mt-2 text-xs text-muted">
         Images upload only when you save. Click “Set feature” to choose the main image shown to customers.
       </p>
     </div>

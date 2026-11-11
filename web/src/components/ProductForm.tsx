@@ -93,7 +93,7 @@ export function ProductForm({ categories, product, onSaved, onCancel }: Props) {
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+      {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
 
       <Field label="Product name">
         <Input value={name} onChange={(e) => setName(e.target.value)} required />
@@ -117,7 +117,7 @@ export function ProductForm({ categories, product, onSaved, onCancel }: Props) {
       </div>
 
       <div>
-        <p className="mb-1 text-sm font-medium text-gray-700">Images</p>
+        <p className="mb-1 text-sm font-medium text-ink">Images</p>
         <ImageUploader existing={product?.images} value={images} onChange={setImages} />
       </div>
 
@@ -126,17 +126,17 @@ export function ProductForm({ categories, product, onSaved, onCancel }: Props) {
       </Field>
 
       {type === "variable" && (
-        <div className="rounded-lg border border-gray-200 p-3">
+        <div className="border border-line p-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-sm font-medium text-gray-700">Variations</p>
+            <p className="text-sm font-medium text-ink">Variations</p>
             <Button type="button" size="sm" variant="secondary" onClick={addVariation}>+ Add</Button>
           </div>
-          <p className="mb-3 text-xs text-gray-400">
+          <p className="mb-3 text-xs text-muted">
             Defines the shared structure (e.g. Red / M). Shop owners set prices per variation when listing.
           </p>
           <div className="space-y-3">
             {variations.map((v, i) => (
-              <div key={i} className="rounded-lg bg-gray-50 p-3">
+              <div key={i} className="bg-cream p-3">
                 <div className="flex gap-2">
                   <Input placeholder="Variation name (e.g. Red / M)" value={v.name} onChange={(e) => updateVariation(i, { name: e.target.value })} />
                   <Input placeholder="SKU" value={v.sku} onChange={(e) => updateVariation(i, { sku: e.target.value })} className="w-32" />

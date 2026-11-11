@@ -53,15 +53,15 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <Link href="/" className="mb-6 block text-center text-2xl font-bold text-indigo-600">
-          ShopHub
+        <Link href="/" className="mb-6 block text-center font-serif text-3xl font-bold tracking-[0.2em] text-brand-red">
+          SHOPHUB
         </Link>
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h1 className="text-lg font-semibold text-gray-900">Sign in</h1>
-          <p className="mt-1 text-sm text-gray-500">Admin &amp; shop-owner access.</p>
+        <div className="border border-line bg-white p-6 shadow-sm">
+          <h1 className="text-lg font-semibold text-ink">Sign in</h1>
+          <p className="mt-1 text-sm text-muted">Admin &amp; shop-owner access.</p>
 
           <form onSubmit={onSubmit} className="mt-5 space-y-4">
-            {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+            {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
             <Field label="Email">
               <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
             </Field>
@@ -73,14 +73,14 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-5 border-t border-gray-100 pt-4">
-            <p className="text-xs font-medium text-gray-500">Quick demo login (password: password)</p>
+          <div className="mt-5 border-t border-cream pt-4">
+            <p className="text-xs font-medium text-muted">Quick demo login (password: password)</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {DEMO.map((d) => (
                 <button
                   key={d.email}
                   onClick={() => fillDemo(d.email)}
-                  className="rounded-lg border border-gray-200 px-2.5 py-1 text-xs text-gray-600 hover:bg-gray-50"
+                  className="border border-line px-2.5 py-1 text-xs text-muted hover:bg-cream"
                 >
                   {d.label}
                 </button>
@@ -88,14 +88,14 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-sm text-gray-500">
+        <p className="mt-4 text-center text-sm text-muted">
           New here?{" "}
-          <Link href="/register" className="text-indigo-600 hover:underline">
+          <Link href="/register" className="text-brand-red hover:underline">
             Create an account
           </Link>
         </p>
-        <p className="mt-1 text-center text-sm text-gray-500">
-          <Link href="/shops" className="text-indigo-600 hover:underline">
+        <p className="mt-1 text-center text-sm text-muted">
+          <Link href="/shops" className="text-brand-red hover:underline">
             Continue as guest →
           </Link>
         </p>

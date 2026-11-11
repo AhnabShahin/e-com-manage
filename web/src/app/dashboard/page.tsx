@@ -18,8 +18,8 @@ export default function MyShops() {
 
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold text-gray-900">My shops</h1>
-      <p className="mb-6 text-sm text-gray-500">
+      <h1 className="mb-2 text-2xl font-bold text-ink">My shops</h1>
+      <p className="mb-6 text-sm text-muted">
         Shops are created by the admin and assigned to you. Open a shop to manage its product listings.
       </p>
 
@@ -31,15 +31,15 @@ export default function MyShops() {
             <Link
               key={shop.id}
               href={`/dashboard/shops/${shop.slug}`}
-              className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-indigo-300 hover:shadow-sm"
+              className="border border-line bg-white p-5 transition hover:border-brand-red/30 hover:shadow-sm"
             >
               <div className="flex items-start justify-between">
-                <h2 className="font-semibold text-gray-900">{shop.name}</h2>
+                <h2 className="font-semibold text-ink">{shop.name}</h2>
                 {shop.is_active ? <Badge color="green">Active</Badge> : <Badge color="amber">Inactive</Badge>}
               </div>
-              {shop.description && <p className="mt-2 line-clamp-2 text-sm text-gray-500">{shop.description}</p>}
-              <p className="mt-4 text-sm text-gray-600">{shop.products_count ?? 0} products listed</p>
-              <p className="mt-1 text-sm font-medium text-indigo-600">Manage listings →</p>
+              {shop.description && <p className="mt-2 line-clamp-2 text-sm text-muted">{shop.description}</p>}
+              <p className="mt-4 text-sm text-muted">{shop.products_count ?? 0} products listed</p>
+              <p className="mt-1 text-sm font-medium text-brand-red">Manage listings →</p>
             </Link>
           ))}
         </div>

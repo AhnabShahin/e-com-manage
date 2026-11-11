@@ -95,11 +95,11 @@ export function ListingForm({ product, shopSlug, shopProduct, onSaved, onCancel 
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+      {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
 
-      <div className="rounded-lg bg-gray-50 p-3 text-sm">
-        <span className="font-medium text-gray-900">{product.name}</span>
-        <span className="ml-2 text-gray-500">{isVariable ? "Variable product" : "Simple product"}</span>
+      <div className="bg-cream p-3 text-sm">
+        <span className="font-medium text-ink">{product.name}</span>
+        <span className="ml-2 text-muted">{isVariable ? "Variable product" : "Simple product"}</span>
       </div>
 
       {!isVariable && (
@@ -109,14 +109,14 @@ export function ListingForm({ product, shopSlug, shopProduct, onSaved, onCancel 
       )}
 
       {isVariable && (
-        <div className="rounded-lg border border-gray-200 p-3">
-          <p className="mb-2 text-sm font-medium text-gray-700">Variation pricing</p>
-          <p className="mb-3 text-xs text-gray-400">Tick the variations you want to sell and set a price for each.</p>
+        <div className="border border-line p-3">
+          <p className="mb-2 text-sm font-medium text-ink">Variation pricing</p>
+          <p className="mb-3 text-xs text-muted">Tick the variations you want to sell and set a price for each.</p>
           <div className="space-y-2">
             {rows.map((r, i) => (
               <div key={r.product_variation_id} className="flex items-center gap-2">
                 <input type="checkbox" checked={r.include} onChange={(e) => updateRow(i, { include: e.target.checked })} />
-                <span className="w-28 shrink-0 text-sm text-gray-700">{r.name}</span>
+                <span className="w-28 shrink-0 text-sm text-ink">{r.name}</span>
                 <Input type="number" min="0" step="0.01" placeholder="Price" value={r.price} disabled={!r.include} onChange={(e) => updateRow(i, { price: e.target.value })} />
                 <Input type="number" min="0" placeholder="Stock" value={r.stock} disabled={!r.include} onChange={(e) => updateRow(i, { stock: e.target.value })} className="w-24" />
               </div>
@@ -126,18 +126,18 @@ export function ListingForm({ product, shopSlug, shopProduct, onSaved, onCancel 
       )}
 
       <div>
-        <p className="mb-1 text-sm font-medium text-gray-700">Shop thumbnail (optional)</p>
+        <p className="mb-1 text-sm font-medium text-ink">Shop thumbnail (optional)</p>
         <div className="flex items-center gap-3">
-          <div className="h-16 w-16 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
+          <div className="h-16 w-16 overflow-hidden border border-line bg-cream">
             {(preview || currentThumb) ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={preview || currentThumb || ""} alt="" className="h-full w-full object-cover" />
             ) : (
-              <div className="flex h-full items-center justify-center text-[10px] text-gray-400">Catalog image</div>
+              <div className="flex h-full items-center justify-center text-[10px] text-muted">Catalog image</div>
             )}
           </div>
           <div className="space-y-1">
-            <label className="inline-block cursor-pointer rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">
+            <label className="inline-block cursor-pointer border border-line px-3 py-1.5 text-xs text-ink hover:bg-cream">
               {thumbFile ? "Change file" : "Upload image"}
               <input type="file" accept="image/*" className="hidden" onChange={(e) => { setThumbFile(e.target.files?.[0] ?? null); setRemoveThumb(false); }} />
             </label>
@@ -145,12 +145,12 @@ export function ListingForm({ product, shopSlug, shopProduct, onSaved, onCancel 
               <button
                 type="button"
                 onClick={() => { setThumbFile(null); setRemoveThumb(true); }}
-                className="ml-2 text-xs text-red-600 hover:underline"
+                className="ml-2 text-xs text-sale hover:underline"
               >
                 Remove
               </button>
             )}
-            <p className="text-[11px] text-gray-400">Overrides the catalog image for this shop.</p>
+            <p className="text-[11px] text-muted">Overrides the catalog image for this shop.</p>
           </div>
         </div>
       </div>

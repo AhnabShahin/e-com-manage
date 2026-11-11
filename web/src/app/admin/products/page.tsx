@@ -50,7 +50,7 @@ export default function AdminProducts() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Shared catalog</h1>
+        <h1 className="text-2xl font-bold text-ink">Shared catalog</h1>
         <Button onClick={openCreate}>+ New product</Button>
       </div>
 
@@ -61,9 +61,9 @@ export default function AdminProducts() {
       ) : products.length === 0 ? (
         <EmptyState title="No products" hint="Add a product to the shared catalog." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="overflow-hidden border border-line bg-white">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+            <thead className="bg-cream text-left text-xs uppercase text-muted">
               <tr>
                 <th className="px-4 py-3">Product</th>
                 <th className="px-4 py-3">Category</th>
@@ -72,11 +72,11 @@ export default function AdminProducts() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-cream">
               {products.map((p) => (
                 <tr key={p.id}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{p.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{p.category?.name ?? "—"}</td>
+                  <td className="px-4 py-3 font-medium text-ink">{p.name}</td>
+                  <td className="px-4 py-3 text-muted">{p.category?.name ?? "—"}</td>
                   <td className="px-4 py-3">
                     {p.type === "variable" ? (
                       <Badge color="indigo">Variable · {p.variations_count ?? 0}</Badge>
@@ -84,7 +84,7 @@ export default function AdminProducts() {
                       <Badge>Simple</Badge>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{p.creator?.name ?? "—"}</td>
+                  <td className="px-4 py-3 text-muted">{p.creator?.name ?? "—"}</td>
                   <td className="px-4 py-3 text-right">
                     <Button size="sm" variant="secondary" onClick={() => openEdit(p)}>Edit</Button>{" "}
                     <Button size="sm" variant="danger" onClick={() => remove(p)}>Delete</Button>

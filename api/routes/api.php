@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ShopController as AdminShopController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -84,6 +85,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::apiResource('shops', AdminShopController::class);
         Route::apiResource('users', UserController::class);
+        Route::get('customers', [CustomerController::class, 'index']);
         Route::post('categories', [CategoryController::class, 'store']);
         Route::delete('categories/{category}', [CategoryController::class, 'destroy']);
     });

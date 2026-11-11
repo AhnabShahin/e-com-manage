@@ -43,9 +43,11 @@ export default function RegisterPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <Link href="/" className="mb-6 block text-center text-2xl font-bold text-indigo-600">ShopHub</Link>
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h1 className="text-lg font-semibold text-gray-900">Create account</h1>
+        <Link href="/" className="mb-6 block text-center font-serif text-3xl font-bold tracking-[0.2em] text-brand-red">
+          SHOPHUB
+        </Link>
+        <div className="border border-line bg-white p-6 shadow-sm">
+          <h1 className="text-lg font-semibold text-ink">Create account</h1>
 
           <div className="mt-4 grid grid-cols-2 gap-2">
             {(["customer", "shop_owner"] as SignupRole[]).map((r) => (
@@ -54,20 +56,20 @@ export default function RegisterPage() {
                 type="button"
                 onClick={() => setRole(r)}
                 className={clsx(
-                  "rounded-lg border px-3 py-2 text-sm font-medium transition",
-                  role === r ? "border-indigo-600 bg-indigo-50 text-indigo-700" : "border-gray-300 text-gray-600 hover:bg-gray-50",
+                  "border px-3 py-2 text-sm font-medium transition",
+                  role === r ? "border-brand-red bg-cream text-maroon" : "border-line text-muted hover:bg-cream",
                 )}
               >
                 {r === "customer" ? "Customer" : "Shop owner"}
               </button>
             ))}
           </div>
-          <p className="mt-2 text-xs text-gray-400">
+          <p className="mt-2 text-xs text-muted">
             {role === "customer" ? "Shop and place orders." : "Create products and manage shop listings."}
           </p>
 
           <form onSubmit={onSubmit} className="mt-5 space-y-4">
-            {error && <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+            {error && <div className="bg-sale/5 px-3 py-2 text-sm text-maroon">{error}</div>}
             <Field label="Name">
               <Input value={name} onChange={(e) => setName(e.target.value)} required autoFocus />
             </Field>
@@ -85,9 +87,9 @@ export default function RegisterPage() {
             </Button>
           </form>
         </div>
-        <p className="mt-4 text-center text-sm text-gray-500">
+        <p className="mt-4 text-center text-sm text-muted">
           Already have an account?{" "}
-          <Link href="/login" className="text-indigo-600 hover:underline">Sign in</Link>
+          <Link href="/login" className="text-brand-red hover:underline">Sign in</Link>
         </p>
       </div>
     </div>

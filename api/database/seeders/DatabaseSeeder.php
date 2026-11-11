@@ -49,19 +49,60 @@ class DatabaseSeeder extends Seeder
 
         // --- Categories ------------------------------------------------------
         $electronics = $this->category('Electronics');
-        $apparel = $this->category('Apparel');
+        $furniture = $this->category('Furniture');
         $home = $this->category('Home & Living');
 
-        // --- Shared catalog products ----------------------------------------
+        // --- Shared catalog products (electronics, furniture & home) --------
+        // Images ship locally from storage/app/public/products — committed to
+        // git so a fresh clone + migrate + seed has working thumbnails offline.
+
         // Simple product created by the admin.
         $cable = Product::create([
             'created_by' => $admin->id,
             'category_id' => $electronics->id,
             'name' => 'USB-C Charging Cable',
             'slug' => 'usb-c-charging-cable',
-            'description' => 'Durable 1m braided USB-C cable.',
+            'description' => 'Durable 1m braided USB-C cable, 60W fast charging.',
             'type' => ProductType::Simple,
-            'thumbnail' => 'https://picsum.photos/seed/cable/600/600',
+            'thumbnail' => 'products/usb-c-charging-cable.svg',
+        ]);
+
+        $headphones = Product::create([
+            'created_by' => $admin->id,
+            'category_id' => $electronics->id,
+            'name' => 'Wireless Bluetooth Headphones',
+            'slug' => 'wireless-bluetooth-headphones',
+            'description' => 'Over-ear Bluetooth 5.3 headphones with 30h battery life.',
+            'type' => ProductType::Simple,
+            'thumbnail' => 'products/wireless-bluetooth-headphones.svg',
+        ]);
+
+        // Variable product (screen size) created by the admin.
+        $tv = Product::create([
+            'created_by' => $admin->id,
+            'category_id' => $electronics->id,
+            'name' => 'Smart LED TV',
+            'slug' => 'smart-led-tv',
+            'description' => '4K HDR smart TV with built-in streaming apps.',
+            'type' => ProductType::Variable,
+            'thumbnail' => 'products/smart-led-tv.svg',
+        ]);
+        foreach (['43-inch', '55-inch', '65-inch'] as $size) {
+            $tv->variations()->create([
+                'name' => $size,
+                'sku' => 'TV-'.strtoupper(str_replace('-inch', '', $size)),
+                'attributes' => ['Size' => $size],
+            ]);
+        }
+
+        $bookshelf = Product::create([
+            'created_by' => $admin->id,
+            'category_id' => $furniture->id,
+            'name' => 'Five-Tier Bookshelf',
+            'slug' => 'five-tier-bookshelf',
+            'description' => 'Solid-frame open bookshelf with five storage tiers.',
+            'type' => ProductType::Simple,
+            'thumbnail' => 'products/five-tier-bookshelf.svg',
         ]);
 
         // Simple product created by a shop owner (available to everyone).
@@ -72,46 +113,65 @@ class DatabaseSeeder extends Seeder
             'slug' => 'ceramic-coffee-mug',
             'description' => '350ml matte ceramic mug.',
             'type' => ProductType::Simple,
-            'thumbnail' => 'https://picsum.photos/seed/mug/600/600',
+            'thumbnail' => 'products/ceramic-coffee-mug.svg',
         ]);
 
-        // Variable product (color x size) created by the admin.
-        $tshirt = Product::create([
-            'created_by' => $admin->id,
-            'category_id' => $apparel->id,
-            'name' => 'Classic Cotton T-Shirt',
-            'slug' => 'classic-cotton-t-shirt',
-            'description' => '100% combed cotton crew-neck tee.',
+        $lamp = Product::create([
+            'created_by' => $alice->id,
+            'category_id' => $electronics->id,
+            'name' => 'LED Desk Lamp',
+            'slug' => 'led-desk-lamp',
+            'description' => 'Dimmable LED desk lamp with adjustable arm.',
+            'type' => ProductType::Simple,
+            'thumbnail' => 'products/led-desk-lamp.svg',
+        ]);
+
+        // Variable product (color) created by a shop owner.
+        $chair = Product::create([
+            'created_by' => $alice->id,
+            'category_id' => $furniture->id,
+            'name' => 'Ergonomic Office Chair',
+            'slug' => 'ergonomic-office-chair',
+            'description' => 'Mesh-back office chair with lumbar support and armrests.',
             'type' => ProductType::Variable,
-            'thumbnail' => 'https://picsum.photos/seed/tshirt/600/600',
+            'thumbnail' => 'products/ergonomic-office-chair.svg',
+        ]);
+        foreach (['Black', 'Grey'] as $color) {
+            $chair->variations()->create([
+                'name' => $color,
+                'sku' => 'OC-'.strtoupper(substr($color, 0, 3)),
+                'attributes' => ['Color' => $color],
+            ]);
+        }
+
+        $desk = Product::create([
+            'created_by' => $bob->id,
+            'category_id' => $furniture->id,
+            'name' => 'Wooden Study Desk',
+            'slug' => 'wooden-study-desk',
+            'description' => 'Compact study desk with a single storage drawer.',
+            'type' => ProductType::Simple,
+            'thumbnail' => 'products/wooden-study-desk.svg',
         ]);
 
-        foreach (['Red', 'Blue'] as $color) {
-            foreach (['S', 'M', 'L'] as $size) {
-                $tshirt->variations()->create([
+        // Variable product (color x size) created by a shop owner.
+        $sofa = Product::create([
+            'created_by' => $bob->id,
+            'category_id' => $furniture->id,
+            'name' => 'Modular Fabric Sofa',
+            'slug' => 'modular-fabric-sofa',
+            'description' => 'Modular fabric sofa, available in two colors and sizes.',
+            'type' => ProductType::Variable,
+            'thumbnail' => 'products/modular-fabric-sofa.svg',
+        ]);
+        foreach (['Charcoal', 'Sand'] as $color) {
+            foreach (['2-Seater', '3-Seater'] as $size) {
+                $sofa->variations()->create([
                     'name' => "{$color} / {$size}",
-                    'sku' => 'TS-'.strtoupper(substr($color, 0, 1))."-{$size}",
+                    'sku' => 'SF-'.strtoupper(substr($color, 0, 3)).'-'.Str::slug($size),
                     'attributes' => ['Color' => $color, 'Size' => $size],
                 ]);
             }
-        }
-
-        // Variable product created by a shop owner.
-        $bottle = Product::create([
-            'created_by' => $bob->id,
-            'category_id' => $home->id,
-            'name' => 'Insulated Water Bottle',
-            'slug' => 'insulated-water-bottle',
-            'description' => 'Stainless steel vacuum flask.',
-            'type' => ProductType::Variable,
-            'thumbnail' => 'https://picsum.photos/seed/bottle/600/600',
-        ]);
-        foreach (['500ml', '750ml', '1L'] as $capacity) {
-            $bottle->variations()->create([
-                'name' => $capacity,
-                'sku' => 'WB-'.Str::slug($capacity),
-                'attributes' => ['Capacity' => $capacity],
-            ]);
         }
 
         // --- Shops (admin-managed) ------------------------------------------
@@ -119,14 +179,14 @@ class DatabaseSeeder extends Seeder
             'owner_id' => $alice->id,
             'name' => "Alice's Gadgets",
             'slug' => 'alices-gadgets',
-            'description' => 'Everyday electronics and accessories.',
+            'description' => 'Everyday electronics and smart home accessories.',
         ]);
 
         $bobShop = Shop::create([
             'owner_id' => $bob->id,
             'name' => "Bob's Lifestyle",
             'slug' => 'bobs-lifestyle',
-            'description' => 'Apparel and home essentials.',
+            'description' => 'Furniture and home essentials.',
         ]);
 
         // A shop with no listings — must stay invisible-of-products to customers.
@@ -140,26 +200,37 @@ class DatabaseSeeder extends Seeder
         // --- Listings: the same catalog product listed by different shops ----
         // at different prices, proving the shared-catalog model.
         $service->attach($aliceShop, $cable, ['price' => 9.99]);
+        $service->attach($aliceShop, $headphones, ['price' => 49.99]);
         $service->attach($aliceShop, $mug, ['price' => 12.50]);
-        $service->attach($aliceShop, $tshirt, [
-            'variations' => $tshirt->variations->map(fn ($v) => [
+        $service->attach($aliceShop, $tv, [
+            'variations' => $tv->variations->map(fn ($v) => [
                 'product_variation_id' => $v->id,
-                'price' => str_contains($v->name, 'L') ? 18.00 : 15.00,
-                'stock' => 25,
+                'price' => match ($v->name) {
+                    '43-inch' => 320.00,
+                    '55-inch' => 480.00,
+                    default => 650.00,
+                },
+                'stock' => 10,
+            ])->all(),
+        ]);
+        $service->attach($aliceShop, $chair, [
+            'variations' => $chair->variations->map(fn ($v) => [
+                'product_variation_id' => $v->id,
+                'price' => 139.00,
+                'stock' => 20,
             ])->all(),
         ]);
 
-        // Bob lists the SAME cable at a different price + the bottle he created.
+        // Bob lists the SAME cable at a different price + his own catalog.
         $bobCable = $service->attach($bobShop, $cable, ['price' => 8.49]);
-        $service->attach($bobShop, $bottle, [
-            'variations' => $bottle->variations->map(fn ($v) => [
+        $service->attach($bobShop, $lamp, ['price' => 24.99]);
+        $service->attach($bobShop, $desk, ['price' => 159.00]);
+        $service->attach($bobShop, $bookshelf, ['price' => 189.00]);
+        $service->attach($bobShop, $sofa, [
+            'variations' => $sofa->variations->map(fn ($v) => [
                 'product_variation_id' => $v->id,
-                'price' => match ($v->name) {
-                    '500ml' => 19.00,
-                    '750ml' => 22.00,
-                    default => 26.00,
-                },
-                'stock' => 15,
+                'price' => str_contains($v->name, '3-Seater') ? 899.00 : 699.00,
+                'stock' => 8,
             ])->all(),
         ]);
 

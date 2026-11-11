@@ -55,23 +55,23 @@ export default function ManageShop() {
 
   return (
     <div>
-      <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/dashboard" className="hover:text-indigo-600">My shops</Link> / <span className="text-gray-700">{shop.name}</span>
+      <nav className="mb-4 text-sm text-muted">
+        <Link href="/dashboard" className="hover:text-brand-red">My shops</Link> / <span className="text-ink">{shop.name}</span>
       </nav>
 
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{shop.name}</h1>
-          <p className="text-sm text-gray-500">{listings.length} products listed</p>
+          <h1 className="text-2xl font-bold text-ink">{shop.name}</h1>
+          <p className="text-sm text-muted">{listings.length} products listed</p>
         </div>
         <div className="flex gap-2">
-          <Link href={`/dashboard/shops/${shop.slug}/orders`} className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+          <Link href={`/dashboard/shops/${shop.slug}/orders`} className="border border-line px-3 py-2 text-sm text-ink hover:bg-cream">
             Orders
           </Link>
-          <Link href={`/shops/${shop.slug}`} className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+          <Link href={`/shops/${shop.slug}`} className="border border-line px-3 py-2 text-sm text-ink hover:bg-cream">
             View storefront
           </Link>
-          <Link href="/dashboard/catalog" className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500">
+          <Link href="/dashboard/catalog" className="bg-brand-red px-3 py-2 text-sm font-medium text-white hover:bg-maroon">
             + Add products
           </Link>
         </div>
@@ -80,9 +80,9 @@ export default function ManageShop() {
       {listings.length === 0 ? (
         <EmptyState title="No products listed" hint="Add products from the shared catalog." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="overflow-hidden border border-line bg-white">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase text-gray-500">
+            <thead className="bg-cream text-left text-xs uppercase text-muted">
               <tr>
                 <th className="px-4 py-3">Product</th>
                 <th className="px-4 py-3">Type</th>
@@ -91,17 +91,17 @@ export default function ManageShop() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-cream">
               {listings.map((sp) => (
                 <tr key={sp.id}>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900">{sp.product?.name}</p>
-                    <p className="text-xs text-gray-400">{sp.product?.category?.name ?? "—"}</p>
+                    <p className="font-medium text-ink">{sp.product?.name}</p>
+                    <p className="text-xs text-muted">{sp.product?.category?.name ?? "—"}</p>
                   </td>
                   <td className="px-4 py-3">
                     {sp.is_variable ? <Badge color="indigo">Variable</Badge> : <Badge>Simple</Badge>}
                   </td>
-                  <td className="px-4 py-3 font-medium text-gray-900">{priceRange(sp.price_from, sp.price_to)}</td>
+                  <td className="px-4 py-3 font-medium text-ink">{priceRange(sp.price_from, sp.price_to)}</td>
                   <td className="px-4 py-3">
                     <button onClick={() => toggleActive(sp)}>
                       {sp.is_active ? <Badge color="green">Visible</Badge> : <Badge color="amber">Hidden</Badge>}

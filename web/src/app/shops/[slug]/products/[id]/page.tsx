@@ -64,10 +64,10 @@ export default function ProductDetail() {
 
   return (
     <div>
-      <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/shops" className="hover:text-indigo-600">Shops</Link> /{" "}
-        <Link href={`/shops/${slug}`} className="hover:text-indigo-600">{sp.shop?.name}</Link> /{" "}
-        <span className="text-gray-700">{sp.product?.name}</span>
+      <nav className="mb-4 text-sm text-muted">
+        <Link href="/shops" className="hover:text-brand-red">Shops</Link> /{" "}
+        <Link href={`/shops/${slug}`} className="hover:text-brand-red">{sp.shop?.name}</Link> /{" "}
+        <span className="text-ink">{sp.product?.name}</span>
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-2">
@@ -75,7 +75,7 @@ export default function ProductDetail() {
           {mainImage ? (
             <ImageZoom src={mainImage} alt={sp.product?.name ?? ""} />
           ) : (
-            <div className="flex aspect-square items-center justify-center rounded-2xl border border-gray-200 bg-gray-100 text-gray-300">
+            <div className="flex aspect-square items-center justify-center border border-line bg-cream text-line">
               No image
             </div>
           )}
@@ -86,7 +86,7 @@ export default function ProductDetail() {
                   key={i}
                   onMouseEnter={() => setActiveImg(i)}
                   onClick={() => setActiveImg(i)}
-                  className={clsx("h-16 w-16 overflow-hidden rounded-lg border", i === activeImg ? "border-indigo-500 ring-2 ring-indigo-200" : "border-gray-200")}
+                  className={clsx("h-16 w-16 overflow-hidden border", i === activeImg ? "border-maroon ring-2 ring-brand-red/20" : "border-line")}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={url} alt="" className="h-full w-full object-cover" />
@@ -94,7 +94,7 @@ export default function ProductDetail() {
               ))}
             </div>
           )}
-          <p className="mt-2 text-xs text-gray-400">Hover the image to zoom.</p>
+          <p className="mt-2 text-xs text-muted">Hover the image to zoom.</p>
         </div>
 
         <div>
@@ -102,34 +102,34 @@ export default function ProductDetail() {
             {sp.product?.category && <Badge>{sp.product.category.name}</Badge>}
             {sp.is_variable && <Badge color="indigo">Variable</Badge>}
           </div>
-          <h1 className="mt-3 text-3xl font-bold text-gray-900">{sp.product?.name}</h1>
+          <h1 className="mt-3 text-3xl font-bold text-ink">{sp.product?.name}</h1>
 
-          <p className="mt-4 text-2xl font-semibold text-gray-900">
+          <p className="mt-4 text-2xl font-semibold text-ink">
             {sp.is_variable && !selected ? priceRange(sp.price_from, sp.price_to) : money(price)}
           </p>
           {stock !== null && stock !== undefined && (
-            <p className="mt-1 text-sm text-gray-500">{stock > 0 ? `${stock} in stock` : "Out of stock"}</p>
+            <p className="mt-1 text-sm text-muted">{stock > 0 ? `${stock} in stock` : "Out of stock"}</p>
           )}
 
           {(sp.details || sp.product?.description) && (
-            <p className="mt-5 whitespace-pre-line text-gray-600">{sp.details || sp.product?.description}</p>
+            <p className="mt-5 whitespace-pre-line text-muted">{sp.details || sp.product?.description}</p>
           )}
 
           {sp.is_variable && sp.variations && sp.variations.length > 0 && (
             <div className="mt-6">
-              <p className="mb-2 text-sm font-medium text-gray-700">Choose an option</p>
+              <p className="mb-2 text-sm font-medium text-ink">Choose an option</p>
               <div className="flex flex-wrap gap-2">
                 {sp.variations.map((v) => (
                   <button
                     key={v.id}
                     onClick={() => setSelected(v)}
                     className={clsx(
-                      "rounded-lg border px-3 py-2 text-sm transition",
-                      selected?.id === v.id ? "border-indigo-600 bg-indigo-50 text-indigo-700" : "border-gray-300 text-gray-700 hover:border-gray-400",
+                      "border px-3 py-2 text-sm transition",
+                      selected?.id === v.id ? "border-brand-red bg-cream text-maroon" : "border-line text-ink hover:border-muted",
                     )}
                   >
                     <span className="font-medium">{v.variation?.name}</span>
-                    <span className="ml-2 text-gray-500">{money(v.price)}</span>
+                    <span className="ml-2 text-muted">{money(v.price)}</span>
                   </button>
                 ))}
               </div>
@@ -139,8 +139,8 @@ export default function ProductDetail() {
           <Button className="mt-8" onClick={addToCart} disabled={stock === 0 || (sp.is_variable && !selected)}>
             {added ? "Added ✓" : "Add to cart"}
           </Button>
-          <p className="mt-2 text-xs text-gray-400">
-            <Link href="/cart" className="text-indigo-600 hover:underline">Go to cart →</Link>
+          <p className="mt-2 text-xs text-muted">
+            <Link href="/cart" className="text-brand-red hover:underline">Go to cart →</Link>
           </p>
         </div>
       </div>

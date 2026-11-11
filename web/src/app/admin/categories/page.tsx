@@ -42,25 +42,25 @@ export default function AdminCategories() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">Categories</h1>
+      <h1 className="mb-6 text-2xl font-bold text-ink">Categories</h1>
 
       <form onSubmit={add} className="mb-6 flex gap-2">
         <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="New category name" required />
         <Button type="submit" disabled={saving}>Add</Button>
       </form>
-      {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mb-4 text-sm text-sale">{error}</p>}
 
       {loading ? (
         <Spinner />
       ) : categories.length === 0 ? (
         <EmptyState title="No categories" />
       ) : (
-        <div className="divide-y divide-gray-100 rounded-xl border border-gray-200 bg-white">
+        <div className="divide-y divide-cream border border-line bg-white">
           {categories.map((c) => (
             <div key={c.id} className="flex items-center justify-between px-4 py-3">
               <div>
-                <p className="font-medium text-gray-900">{c.name}</p>
-                <p className="text-xs text-gray-400">{c.products_count ?? 0} products</p>
+                <p className="font-medium text-ink">{c.name}</p>
+                <p className="text-xs text-muted">{c.products_count ?? 0} products</p>
               </div>
               <Button size="sm" variant="danger" onClick={() => remove(c)}>Delete</Button>
             </div>

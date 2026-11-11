@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f5efe5"/>
+  <rect x="130" y="260" width="340" height="110" rx="18" fill="none" stroke="#16161a" stroke-width="14"/>
+  <rect x="130" y="210" width="340" height="70" rx="18" fill="none" stroke="#16161a" stroke-width="14"/>
+  <rect x="110" y="240" width="40" height="120" rx="16" fill="none" stroke="#16161a" stroke-width="12"/>
+  <rect x="450" y="240" width="40" height="120" rx="16" fill="none" stroke="#16161a" stroke-width="12"/>
+  <line x1="260" y1="270" x2="260" y2="360" stroke="#16161a" stroke-width="8"/>
+  <line x1="340" y1="270" x2="340" y2="360" stroke="#16161a" stroke-width="8"/>
+  <rect x="150" y="365" width="20" height="30" fill="#16161a"/>
+  <rect x="430" y="365" width="20" height="30" fill="#16161a"/>
+  <rect x="185" y="220" width="60" height="40" rx="8" fill="#8a0e18" transform="rotate(-8 215 240)"/>
+  <text x="300" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#767676">FABRIC SOFA</text>
+</svg>

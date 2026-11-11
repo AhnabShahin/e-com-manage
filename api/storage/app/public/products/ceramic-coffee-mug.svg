@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f5efe5"/>
+  <path d="M 220 220 L 220 360 C 220 390, 250 400, 300 400 C 350 400, 380 390, 380 360 L 380 220 Z" fill="none" stroke="#16161a" stroke-width="14"/>
+  <path d="M 380 250 C 430 250, 430 330, 380 330" fill="none" stroke="#16161a" stroke-width="14"/>
+  <rect x="220" y="280" width="160" height="26" fill="#8a0e18"/>
+  <path d="M 265 190 C 255 170, 275 160, 265 140" fill="none" stroke="#767676" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 300 190 C 290 170, 310 160, 300 140" fill="none" stroke="#767676" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 335 190 C 325 170, 345 160, 335 140" fill="none" stroke="#767676" stroke-width="8" stroke-linecap="round"/>
+  <text x="300" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#767676">COFFEE MUG</text>
+</svg>

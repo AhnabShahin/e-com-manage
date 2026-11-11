@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'role_label' => $this->role->label(),
             'is_active' => $this->is_active,
             'shops_count' => $this->whenCounted('shops'),
+            'orders_count' => $this->whenCounted('orders'),
             'created_at' => $this->created_at,
         ];
     }

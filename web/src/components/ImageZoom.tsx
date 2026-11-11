@@ -26,7 +26,7 @@ export function ImageZoom({ src, alt }: { src: string; alt: string }) {
       onMouseEnter={() => setZooming(true)}
       onMouseLeave={() => setZooming(false)}
       onMouseMove={onMove}
-      className="aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border border-gray-200 bg-gray-100"
+      className="aspect-square w-full cursor-zoom-in overflow-hidden border border-line bg-cream"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

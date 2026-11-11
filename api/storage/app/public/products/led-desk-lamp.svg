@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f5efe5"/>
+  <ellipse cx="300" cy="440" rx="90" ry="16" fill="#16161a"/>
+  <line x1="300" y1="440" x2="300" y2="330" stroke="#16161a" stroke-width="14" stroke-linecap="round"/>
+  <line x1="300" y1="330" x2="380" y2="250" stroke="#16161a" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="300" cy="330" r="10" fill="#16161a"/>
+  <path d="M 340 200 L 430 220 L 400 270 L 330 250 Z" fill="#16161a"/>
+  <path d="M 365 270 L 405 340 L 325 340 Z" fill="#8a0e18" opacity="0.35"/>
+  <text x="300" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#767676">DESK LAMP</text>
+</svg>

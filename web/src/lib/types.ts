@@ -17,6 +17,7 @@ export interface User {
   role_label: string;
   is_active: boolean;
   shops_count?: number;
+  orders_count?: number;
   created_at?: string;
 }
 
